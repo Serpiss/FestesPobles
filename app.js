@@ -82,7 +82,7 @@ function renderList(items) {
     li.className = 'item';
     li.innerHTML = `
       <strong>${f.nombre}</strong><br>
-      ${f.municipio} (${f.comarca}, ${f.provincia})<br>
+      ${f.municipio} (${f.comarca})<br>
       ${f.inicio} → ${f.fin}
     `;
 
@@ -147,7 +147,7 @@ function renderMapa(items) {
   items.forEach((f) => {
     const div = document.createElement('div');
     div.className = 'municipio';
-    div.textContent = `${f.municipio}\n${f.provincia}`;
+    div.textContent = f.municipio;
     div.title = 'Clic para filtrar por municipio';
     div.addEventListener('click', () => {
       searchFilter.value = f.municipio;
