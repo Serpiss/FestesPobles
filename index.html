@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Festes del Comtat</title>
+    <style>
+      :root {
+        --bg: #f7f7fb;
+        --card: #ffffff;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --accent: #6d28d9;
+        --accent-2: #9333ea;
+        --chip: #ede9fe;
+        --border: #e5e7eb;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background:
+          radial-gradient(circle at 10% 10%, #ede9fe 0%, transparent 45%),
+          radial-gradient(circle at 90% 0%, #e0f2fe 0%, transparent 35%),
+          var(--bg);
+        color: var(--text);
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 1.2rem 1rem 2.5rem;
+      }
+
+      .hero {
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        background: linear-gradient(120deg, rgba(109, 40, 217, 0.95), rgba(147, 51, 234, 0.9));
+        color: white;
+        padding: 1.8rem;
+        box-shadow: 0 10px 30px rgba(109, 40, 217, 0.2);
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+      }
+
+      .hero p {
+        margin: 0.75rem 0 0;
+        opacity: 0.95;
+      }
+
+      .toolbar {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .lang-switch {
+        display: inline-flex;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 4px;
+        gap: 4px;
+      }
+
+      .lang-switch button {
+        border: 0;
+        background: transparent;
+        color: white;
+        padding: 0.45rem 0.8rem;
+        border-radius: 999px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .lang-switch button.active {
+        background: white;
+        color: var(--accent);
+      }
+
+      .search {
+        flex: 1;
+        min-width: 230px;
+      }
+
+      .search input {
+        width: 100%;
+        border: 0;
+        border-radius: 999px;
+        padding: 0.65rem 1rem;
+        font-size: 0.95rem;
+      }
+
+      .stats {
+        margin: 1rem 0 0.5rem;
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 0.9rem;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1rem;
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      }
+
+      .card h3 {
+        margin: 0 0 0.7rem;
+      }
+
+      .tag {
+        display: inline-block;
+        font-size: 0.75rem;
+        color: #4c1d95;
+        background: var(--chip);
+        padding: 0.2rem 0.55rem;
+        border-radius: 999px;
+        margin-bottom: 0.6rem;
+      }
+
+      .fest-title {
+        margin: 0.65rem 0 0.35rem;
+        font-size: 0.86rem;
+        text-transform: uppercase;
+        color: var(--muted);
+        letter-spacing: 0.03em;
+      }
+
+      .fests {
+        margin: 0;
+        padding-left: 1.1rem;
+      }
+
+      .fests li {
+        margin-bottom: 0.35rem;
+        line-height: 1.35;
+      }
+
+      footer {
+        margin-top: 1.5rem;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <section class="hero">
+        <h1 id="title"></h1>
+        <p id="subtitle"></p>
+
+        <div class="toolbar">
+          <div class="lang-switch" aria-label="Language selector">
+            <button id="btn-es" class="active">Castellano</button>
+            <button id="btn-val">Valencià</button>
+          </div>
+
+          <label class="search">
+            <input id="searchInput" type="search" />
+          </label>
+        </div>
+      </section>
+
+      <div class="stats" id="count"></div>
+      <section class="grid" id="grid"></section>
+
+      <footer id="note"></footer>
+    </main>
+
+    <script>
+      const i18n = {
+        es: {
+          title: 'Fiestas de la comarca del Comtat (Alicante)',
+          subtitle:
+            'Listado de pueblos y sus fiestas más conocidas. Puedes buscar por nombre del municipio.',
+          searchPlaceholder: 'Buscar pueblo…',
+          monthTag: 'Fechas orientativas',
+          festTitle: 'Fiestas destacadas',
+          count: (shown, total) => `Mostrando ${shown} de ${total} municipios`,
+          note:
+            'Nota: en algunos pueblos hay varias celebraciones locales y las fechas pueden variar ligeramente cada año.',
+          noResults: 'No hay resultados para esta búsqueda.'
+        },
+        val: {
+          title: 'Festes de la comarca del Comtat (Alacant)',
+          subtitle:
+            'Llistat de pobles i les seues festes més conegudes. Pots buscar pel nom del municipi.',
+          searchPlaceholder: 'Buscar poble…',
+          monthTag: 'Dates orientatives',
+          festTitle: 'Festes destacades',
+          count: (shown, total) => `Mostrant ${shown} de ${total} municipis`,
+          note:
+            "Nota: en alguns pobles hi ha diverses celebracions locals i les dates poden variar lleugerament cada any.",
+          noResults: 'No hi ha resultats per a esta cerca.'
+        }
+      };
+
+      const towns = [
+        {
+          es: 'Agres',
+          val: 'Agres',
+          months: 'Septiembre',
+          festsEs: ['Fiestas patronales de la Mare de Déu del Castell.'],
+          festsVal: ['Festes patronals de la Mare de Déu del Castell.']
+        },
+        {
+          es: 'Alcoleja',
+          val: 'Alcoleja',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales en honor a San Vicente Ferrer y la Divina Aurora.'],
+          festsVal: ['Festes patronals en honor de Sant Vicent Ferrer i la Divina Aurora.']
+        },
+        {
+          es: 'Alcosser de Planes',
+          val: "Alcosser de Planes",
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales con actos religiosos y culturales de verano.'],
+          festsVal: ['Festes patronals amb actes religiosos i culturals d’estiu.']
+        },
+        {
+          es: 'Alfafara',
+          val: 'Alfafara',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales en honor a San Roque y la Divina Aurora.'],
+          festsVal: ['Festes patronals en honor de Sant Roc i la Divina Aurora.']
+        },
+        {
+          es: 'Almudaina',
+          val: 'Almudaina',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales con verbenas y actividades populares.'],
+          festsVal: ['Festes patronals amb revetles i activitats populars.']
+        },
+        {
+          es: "l'Alqueria d'Asnar",
+          val: "l'Alqueria d'Asnar",
+          months: 'Septiembre',
+          festsEs: ['Fiestas de Moros y Cristianos y fiestas patronales.'],
+          festsVal: ['Festes de Moros i Cristians i festes patronals.']
+        },
+        {
+          es: 'Balones',
+          val: 'Balones',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales de verano con tradición local.'],
+          festsVal: ['Festes patronals d’estiu amb tradició local.']
+        },
+        {
+          es: 'Benasau',
+          val: 'Benasau',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales de verano en honor a sus patrones.'],
+          festsVal: ['Festes patronals d’estiu en honor dels seus patrons.']
+        },
+        {
+          es: 'Beniarrés',
+          val: 'Beniarrés',
+          months: 'Septiembre',
+          festsEs: ['Moros y Cristianos y fiestas patronales en honor a la Mare de Déu de la Cova Santa.'],
+          festsVal: ['Moros i Cristians i festes patronals en honor de la Mare de Déu de la Cova Santa.']
+        },
+        {
+          es: 'Benilloba',
+          val: 'Benilloba',
+          months: 'Agosto',
+          festsEs: ['Moros y Cristianos y fiestas patronales en honor a San Joaquín.'],
+          festsVal: ['Moros i Cristians i festes patronals en honor de Sant Joaquim.']
+        },
+        {
+          es: 'Benillup',
+          val: 'Benillup',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales de verano.'],
+          festsVal: ['Festes patronals d’estiu.']
+        },
+        {
+          es: 'Benimarfull',
+          val: 'Benimarfull',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales en honor a San Roque.'],
+          festsVal: ['Festes patronals en honor de Sant Roc.']
+        },
+        {
+          es: 'Benimassot',
+          val: 'Benimassot',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales con actos populares y religiosos.'],
+          festsVal: ['Festes patronals amb actes populars i religiosos.']
+        },
+        {
+          es: 'Cocentaina',
+          val: 'Cocentaina',
+          months: 'Noviembre y agosto',
+          festsEs: ['Fira de Tots Sants (noviembre).', 'Fiestas de Moros y Cristianos en honor a San Hipólito (agosto).'],
+          festsVal: ['Fira de Tots Sants (novembre).', 'Festes de Moros i Cristians en honor de Sant Hipòlit (agost).']
+        },
+        {
+          es: 'Fageca',
+          val: 'Fageca',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales de verano.'],
+          festsVal: ['Festes patronals d’estiu.']
+        },
+        {
+          es: 'Famorca',
+          val: 'Famorca',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales con programación vecinal.'],
+          festsVal: ['Festes patronals amb programació veïnal.']
+        },
+        {
+          es: 'Gaianes',
+          val: 'Gaianes',
+          months: 'Septiembre',
+          festsEs: ['Fiestas patronales en honor al Santísimo Cristo del Amparo.'],
+          festsVal: ['Festes patronals en honor del Santíssim Crist de l’Empar.']
+        },
+        {
+          es: 'Gorga',
+          val: 'Gorga',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales en honor a la Virgen de la Asunción.'],
+          festsVal: ['Festes patronals en honor de la Mare de Déu de l’Assumpció.']
+        },
+        {
+          es: 'Millena',
+          val: 'Millena',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales de verano con tradición local.'],
+          festsVal: ['Festes patronals d’estiu amb tradició local.']
+        },
+        {
+          es: "Muro d'Alcoi",
+          val: "Muro d'Alcoi",
+          months: 'Mayo',
+          festsEs: ['Fiestas de Moros y Cristianos en honor a la Mare de Déu dels Desemparats.'],
+          festsVal: ['Festes de Moros i Cristians en honor de la Mare de Déu dels Desemparats.']
+        },
+        {
+          es: "l'Orxa",
+          val: "l'Orxa",
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales y de Moros y Cristianos.'],
+          festsVal: ['Festes patronals i de Moros i Cristians.']
+        },
+        {
+          es: 'Planes',
+          val: 'Planes',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales en honor al Santísimo Cristo.'],
+          festsVal: ['Festes patronals en honor del Santíssim Crist.']
+        },
+        {
+          es: 'Quatretondeta',
+          val: 'Quatretondeta',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales con actos culturales y religiosos.'],
+          festsVal: ['Festes patronals amb actes culturals i religiosos.']
+        },
+        {
+          es: 'Tollos',
+          val: 'Tollos',
+          months: 'Agosto',
+          festsEs: ['Fiestas patronales de verano.'],
+          festsVal: ['Festes patronals d’estiu.']
+        }
+      ];
+
+      let lang = 'es';
+      let query = '';
+
+      const titleEl = document.getElementById('title');
+      const subtitleEl = document.getElementById('subtitle');
+      const inputEl = document.getElementById('searchInput');
+      const countEl = document.getElementById('count');
+      const noteEl = document.getElementById('note');
+      const gridEl = document.getElementById('grid');
+      const btnEs = document.getElementById('btn-es');
+      const btnVal = document.getElementById('btn-val');
+
+      function render() {
+        const t = i18n[lang];
+        titleEl.textContent = t.title;
+        subtitleEl.textContent = t.subtitle;
+        inputEl.placeholder = t.searchPlaceholder;
+        noteEl.textContent = t.note;
+
+        btnEs.classList.toggle('active', lang === 'es');
+        btnVal.classList.toggle('active', lang === 'val');
+
+        const filtered = towns.filter((town) => {
+          const name = lang === 'es' ? town.es : town.val;
+          return name.toLowerCase().includes(query.toLowerCase());
+        });
+
+        countEl.textContent = t.count(filtered.length, towns.length);
+
+        if (!filtered.length) {
+          gridEl.innerHTML = `<article class="card"><p>${t.noResults}</p></article>`;
+          return;
+        }
+
+        gridEl.innerHTML = filtered
+          .map((town) => {
+            const name = lang === 'es' ? town.es : town.val;
+            const fests = lang === 'es' ? town.festsEs : town.festsVal;
+
+            return `
+              <article class="card">
+                <h3>${name}</h3>
+                <span class="tag">${t.monthTag}: ${town.months}</span>
+                <h4 class="fest-title">${t.festTitle}</h4>
+                <ul class="fests">
+                  ${fests.map((fest) => `<li>${fest}</li>`).join('')}
+                </ul>
+              </article>
+            `;
+          })
+          .join('');
+      }
+
+      inputEl.addEventListener('input', (e) => {
+        query = e.target.value;
+        render();
+      });
+
+      btnEs.addEventListener('click', () => {
+        lang = 'es';
+        document.documentElement.lang = 'es';
+        render();
+      });
+
+      btnVal.addEventListener('click', () => {
+        lang = 'val';
+        document.documentElement.lang = 'ca';
+        render();
+      });
+
+      render();
+    </script>
+  </body>
+</html>
