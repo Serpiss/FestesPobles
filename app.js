@@ -28,6 +28,135 @@ const fiestas = [
   }
 ];
 
+const municipiosComtat = [
+  'Agres',
+  'Alcoleja',
+  'Alcosser de Planes',
+  'Alfafara',
+  'Almudaina',
+  "l'Alqueria d'Asnar",
+  'Balones',
+  'Benasau',
+  'Beniarrés',
+  'Benilloba',
+  'Benillup',
+  'Benimarfull',
+  'Benimassot',
+  'Cocentaina',
+  'Fageca',
+  'Famorca',
+  'Gaianes',
+  'Gorga',
+  'Millena',
+  "Muro d'Alcoi",
+  "l'Orxa",
+  'Planes',
+  'Quatretondeta',
+  'Tollos'
+];
+
+const i18n = {
+  es: {
+    languageLabel: 'Idioma',
+    heroSubtitle: 'Consulta fiestas patronales de la Comunitat Valenciana en un solo lugar.',
+    login: 'Iniciar sesión (demo)',
+    logout: 'Cerrar sesión (demo)',
+    loggedIn: 'Sesión iniciada. Puedes guardar favoritos.',
+    loggedOut: 'No has iniciado sesión.',
+    filters: 'Filtros',
+    province: 'Provincia',
+    comarca: 'Comarca',
+    month: 'Mes',
+    search: 'Búsqueda',
+    searchPlaceholder: 'Nombre del pueblo o fiesta',
+    all: 'Todas',
+    allMonths: 'Todos',
+    mapTitle: 'Mapa (MVP visual)',
+    mapHint: 'Pulsa un municipio para ver su ficha.',
+    mapTooltip: 'Clic para filtrar por municipio',
+    calendar: 'Calendario',
+    festivalsList: 'Listado de fiestas',
+    municipalitiesTitle: 'Municipios añadidos',
+    favorites: 'Favoritos',
+    footerNote: 'Proyecto informativo sin comentarios públicos. Próximo paso: integración con datos de ayuntamientos.',
+    noResults: 'No hay resultados con estos filtros.',
+    addFavorite: '☆ Añadir favorito',
+    removeFavorite: '★ Quitar favorito',
+    loginToFavs: 'Inicia sesión para usar favoritos.',
+    noFavsYet: 'No tienes fiestas favoritas todavía.',
+    start: 'Inicio',
+    end: 'Fin'
+  },
+  ca: {
+    languageLabel: 'Idioma',
+    heroSubtitle: 'Consulta festes patronals de la Comunitat Valenciana en un sol lloc.',
+    login: 'Inicia sessió (demo)',
+    logout: 'Tanca sessió (demo)',
+    loggedIn: 'Sessió iniciada. Pots guardar favorits.',
+    loggedOut: 'No has iniciat sessió.',
+    filters: 'Filtres',
+    province: 'Província',
+    comarca: 'Comarca',
+    month: 'Mes',
+    search: 'Cerca',
+    searchPlaceholder: 'Nom del poble o de la festa',
+    all: 'Totes',
+    allMonths: 'Tots',
+    mapTitle: 'Mapa (MVP visual)',
+    mapHint: 'Prem un municipi per a vore la seua fitxa.',
+    mapTooltip: 'Clic per a filtrar per municipi',
+    calendar: 'Calendari',
+    festivalsList: 'Llistat de festes',
+    municipalitiesTitle: 'Municipis afegits',
+    favorites: 'Favorits',
+    footerNote: 'Projecte informatiu sense comentaris públics. Pròxim pas: integració amb dades dels ajuntaments.',
+    noResults: 'No hi ha resultats amb aquests filtres.',
+    addFavorite: '☆ Afegir favorit',
+    removeFavorite: '★ Llevar favorit',
+    loginToFavs: 'Inicia sessió per a usar favorits.',
+    noFavsYet: 'Encara no tens festes favorites.',
+    start: 'Inici',
+    end: 'Fi'
+  },
+  en: {
+    languageLabel: 'Language',
+    heroSubtitle: 'Check patron saint festivals in the Valencian Community in one place.',
+    login: 'Sign in (demo)',
+    logout: 'Sign out (demo)',
+    loggedIn: 'Session started. You can save favorites.',
+    loggedOut: 'You are not signed in.',
+    filters: 'Filters',
+    province: 'Province',
+    comarca: 'County',
+    month: 'Month',
+    search: 'Search',
+    searchPlaceholder: 'Town or festival name',
+    all: 'All',
+    allMonths: 'All',
+    mapTitle: 'Map (visual MVP)',
+    mapHint: 'Click a municipality to view details.',
+    mapTooltip: 'Click to filter by municipality',
+    calendar: 'Calendar',
+    festivalsList: 'Festival list',
+    municipalitiesTitle: 'Added municipalities',
+    favorites: 'Favorites',
+    footerNote: 'Informative project without public comments. Next step: integration with town council data.',
+    noResults: 'No results for these filters.',
+    addFavorite: '☆ Add favorite',
+    removeFavorite: '★ Remove favorite',
+    loginToFavs: 'Sign in to use favorites.',
+    noFavsYet: 'You do not have favorite festivals yet.',
+    start: 'Start',
+    end: 'End'
+  }
+};
+
+const monthNames = {
+  es: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+  ca: ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'],
+  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+};
+
 const provinciaFilter = document.getElementById('provinciaFilter');
 const comarcaFilter = document.getElementById('comarcaFilter');
 const mesFilter = document.getElementById('mesFilter');
@@ -35,26 +164,48 @@ const searchFilter = document.getElementById('searchFilter');
 const fiestasList = document.getElementById('fiestasList');
 const favoritosList = document.getElementById('favoritosList');
 const calendarList = document.getElementById('calendarList');
+const municipiosList = document.getElementById('municipiosList');
 const mapa = document.getElementById('mapa');
 const loginBtn = document.getElementById('loginBtn');
 const sessionState = document.getElementById('sessionState');
+const languageSelect = document.getElementById('languageSelect');
 
+let currentLang = localStorage.getItem('language') || 'es';
 let loggedIn = false;
 let favoritos = new Set(JSON.parse(localStorage.getItem('favoritos') || '[]'));
+
+function t(key) {
+  return i18n[currentLang]?.[key] ?? i18n.es[key] ?? key;
+}
 
 function uniqueValues(key) {
   return [...new Set(fiestas.map((f) => f[key]))].sort();
 }
 
-function fillFilters() {
+function fillStaticFilters() {
   uniqueValues('provincia').forEach((v) => provinciaFilter.add(new Option(v, v)));
   uniqueValues('comarca').forEach((v) => comarcaFilter.add(new Option(v, v)));
+}
 
-  const months = [
-    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-  ];
-  months.forEach((name, index) => mesFilter.add(new Option(name, String(index + 1).padStart(2, '0'))));
+function fillMonthFilter() {
+  const selectedValue = mesFilter.value;
+  mesFilter.innerHTML = '';
+  mesFilter.add(new Option(t('allMonths'), ''));
+  monthNames[currentLang].forEach((name, index) => mesFilter.add(new Option(name, String(index + 1).padStart(2, '0'))));
+  mesFilter.value = selectedValue;
+}
+
+function applyTranslations() {
+  document.documentElement.lang = currentLang === 'ca' ? 'ca' : currentLang;
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+    el.placeholder = t(el.dataset.i18nPlaceholder);
+  });
+  loginBtn.textContent = loggedIn ? t('logout') : t('login');
+  sessionState.textContent = loggedIn ? t('loggedIn') : t('loggedOut');
+  fillMonthFilter();
 }
 
 function applyFilters() {
@@ -73,7 +224,7 @@ function applyFilters() {
 function renderList(items) {
   fiestasList.innerHTML = '';
   if (!items.length) {
-    fiestasList.innerHTML = '<li class="item">No hay resultados con estos filtros.</li>';
+    fiestasList.innerHTML = `<li class="item">${t('noResults')}</li>`;
     return;
   }
 
@@ -88,7 +239,7 @@ function renderList(items) {
 
     if (loggedIn) {
       const favBtn = document.createElement('button');
-      favBtn.textContent = favoritos.has(f.id) ? '★ Quitar favorito' : '☆ Añadir favorito';
+      favBtn.textContent = favoritos.has(f.id) ? t('removeFavorite') : t('addFavorite');
       favBtn.addEventListener('click', () => {
         if (favoritos.has(f.id)) {
           favoritos.delete(f.id);
@@ -110,11 +261,11 @@ function renderFavoritos() {
   favoritosList.innerHTML = '';
   const favItems = fiestas.filter((f) => favoritos.has(f.id));
   if (!loggedIn) {
-    favoritosList.innerHTML = '<li class="item">Inicia sesión para usar favoritos.</li>';
+    favoritosList.innerHTML = `<li class="item">${t('loginToFavs')}</li>`;
     return;
   }
   if (!favItems.length) {
-    favoritosList.innerHTML = '<li class="item">No tienes fiestas favoritas todavía.</li>';
+    favoritosList.innerHTML = `<li class="item">${t('noFavsYet')}</li>`;
     return;
   }
   favItems.forEach((f) => {
@@ -129,8 +280,8 @@ function renderCalendar(items) {
   calendarList.innerHTML = '';
   const byDate = items
     .flatMap((f) => [
-      { date: f.inicio, label: `Inicio · ${f.nombre}` },
-      { date: f.fin, label: `Fin · ${f.nombre}` }
+      { date: f.inicio, label: `${t('start')} · ${f.nombre}` },
+      { date: f.fin, label: `${t('end')} · ${f.nombre}` }
     ])
     .sort((a, b) => a.date.localeCompare(b.date));
 
@@ -148,7 +299,7 @@ function renderMapa(items) {
     const div = document.createElement('div');
     div.className = 'municipio';
     div.textContent = `${f.municipio}\n${f.provincia}`;
-    div.title = 'Clic para filtrar por municipio';
+    div.title = t('mapTooltip');
     div.addEventListener('click', () => {
       searchFilter.value = f.municipio;
       renderAll();
@@ -157,12 +308,24 @@ function renderMapa(items) {
   });
 }
 
+function renderMunicipios() {
+  municipiosList.innerHTML = '';
+  municipiosComtat.forEach((municipio) => {
+    const li = document.createElement('li');
+    li.className = 'item';
+    li.textContent = municipio;
+    municipiosList.appendChild(li);
+  });
+}
+
 function renderAll() {
+  applyTranslations();
   const filtered = applyFilters();
   renderList(filtered);
   renderFavoritos();
   renderCalendar(filtered);
   renderMapa(filtered);
+  renderMunicipios();
 }
 
 [provinciaFilter, comarcaFilter, mesFilter, searchFilter].forEach((el) => {
@@ -171,12 +334,15 @@ function renderAll() {
 
 loginBtn.addEventListener('click', () => {
   loggedIn = !loggedIn;
-  sessionState.textContent = loggedIn
-    ? 'Sesión iniciada. Puedes guardar favoritos.'
-    : 'No has iniciado sesión.';
-  loginBtn.textContent = loggedIn ? 'Cerrar sesión (demo)' : 'Iniciar sesión (demo)';
   renderAll();
 });
 
-fillFilters();
+languageSelect.addEventListener('change', () => {
+  currentLang = languageSelect.value;
+  localStorage.setItem('language', currentLang);
+  renderAll();
+});
+
+fillStaticFilters();
+languageSelect.value = currentLang;
 renderAll();

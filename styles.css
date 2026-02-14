@@ -20,6 +20,21 @@ body {
   padding: 2rem 1.5rem;
 }
 
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+}
+
 main {
   max-width: 1100px;
   margin: 1.5rem auto;
@@ -72,6 +87,10 @@ button {
   padding: 0;
   display: grid;
   gap: 0.6rem;
+}
+
+.list.compact {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
 .item {
