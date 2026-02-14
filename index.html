@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Festes dels Pobles</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <h1 id="title">Festes dels Pobles</h1>
+    <p id="subtitle">Consulta fiestas populares con un formato clásico, ahora mejorado.</p>
+    <div class="toolbar">
+      <label class="input-wrap">
+        <span id="searchLabel">Buscar pueblo o fiesta</span>
+        <input id="search" type="search" placeholder="Ej. Alzira, Fallas..." />
+      </label>
+
+      <label class="input-wrap">
+        <span id="monthLabel">Mes</span>
+        <select id="monthFilter">
+          <option value="all">Todos</option>
+        </select>
+      </label>
+
+      <label class="input-wrap">
+        <span id="langLabel">Idioma</span>
+        <select id="languageSelect">
+          <option value="es">Español</option>
+          <option value="val">Valencià</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <main>
+    <section class="results-meta">
+      <strong id="resultsCount"></strong>
+      <button id="toggleView" type="button">Cambiar a tarjetas</button>
+    </section>
+
+    <section id="tableView" class="table-view" aria-label="Listado de fiestas">
+      <table>
+        <thead>
+          <tr>
+            <th id="thTown">Pueblo</th>
+            <th id="thFest">Fiesta</th>
+            <th id="thMonth">Mes</th>
+            <th id="thDesc">Descripción</th>
+          </tr>
+        </thead>
+        <tbody id="festTableBody"></tbody>
+      </table>
+    </section>
+
+    <section id="cardView" class="card-view hidden" aria-label="Vista de tarjetas"></section>
+  </main>
+
+  <template id="rowTemplate">
+    <tr>
+      <td class="town"></td>
+      <td class="fest"></td>
+      <td class="month"></td>
+      <td class="desc"></td>
+    </tr>
+  </template>
+
+  <template id="cardTemplate">
+    <article class="card">
+      <h3 class="fest"></h3>
+      <p class="town"></p>
+      <p class="month"></p>
+      <p class="desc"></p>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
