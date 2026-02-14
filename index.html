@@ -8,67 +8,82 @@
   </head>
   <body>
     <header class="hero">
-      <h1>FestesPobles</h1>
-      <p>Consulta fiestas patronales de la Comunitat Valenciana en un solo lugar.</p>
-      <button id="loginBtn">Iniciar sesión (demo)</button>
-      <p id="sessionState" class="muted">No has iniciado sesión.</p>
+      <div class="hero-top">
+        <h1>FestesPobles</h1>
+        <label class="language-switcher">
+          <span data-i18n="languageLabel">Idioma</span>
+          <select id="languageSelect">
+            <option value="es">Español</option>
+            <option value="ca">Valencià</option>
+            <option value="en">English</option>
+          </select>
+        </label>
+      </div>
+      <p data-i18n="heroSubtitle">Consulta fiestas patronales de la Comunitat Valenciana en un solo lugar.</p>
+      <button id="loginBtn" data-i18n="login">Iniciar sesión (demo)</button>
+      <p id="sessionState" class="muted" data-i18n="loggedOut">No has iniciado sesión.</p>
     </header>
 
     <main>
       <section class="card">
-        <h2>Filtros</h2>
+        <h2 data-i18n="filters">Filtros</h2>
         <div class="filters">
           <label>
-            Provincia
+            <span data-i18n="province">Provincia</span>
             <select id="provinciaFilter">
-              <option value="">Todas</option>
+              <option value="" data-i18n="all">Todas</option>
             </select>
           </label>
           <label>
-            Comarca
+            <span data-i18n="comarca">Comarca</span>
             <select id="comarcaFilter">
-              <option value="">Todas</option>
+              <option value="" data-i18n="all">Todas</option>
             </select>
           </label>
           <label>
-            Mes
+            <span data-i18n="month">Mes</span>
             <select id="mesFilter">
-              <option value="">Todos</option>
+              <option value="" data-i18n="allMonths">Todos</option>
             </select>
           </label>
           <label>
-            Búsqueda
-            <input id="searchFilter" type="search" placeholder="Nombre del pueblo o fiesta" />
+            <span data-i18n="search">Búsqueda</span>
+            <input id="searchFilter" type="search" placeholder="Nombre del pueblo o fiesta" data-i18n-placeholder="searchPlaceholder" />
           </label>
         </div>
       </section>
 
       <section class="grid-2">
         <article class="card">
-          <h2>Mapa (MVP visual)</h2>
-          <p class="muted">Pulsa un municipio para ver su ficha.</p>
+          <h2 data-i18n="mapTitle">Mapa (MVP visual)</h2>
+          <p class="muted" data-i18n="mapHint">Pulsa un municipio para ver su ficha.</p>
           <div id="mapa" class="mapa"></div>
         </article>
 
         <article class="card">
-          <h2>Calendario</h2>
+          <h2 data-i18n="calendar">Calendario</h2>
           <ul id="calendarList" class="list"></ul>
         </article>
       </section>
 
       <section class="card">
-        <h2>Listado de fiestas</h2>
+        <h2 data-i18n="festivalsList">Listado de fiestas</h2>
         <ul id="fiestasList" class="list"></ul>
       </section>
 
       <section class="card">
-        <h2>Favoritos</h2>
+        <h2 data-i18n="municipalitiesTitle">Municipios añadidos</h2>
+        <ul id="municipiosList" class="list compact"></ul>
+      </section>
+
+      <section class="card">
+        <h2 data-i18n="favorites">Favoritos</h2>
         <ul id="favoritosList" class="list"></ul>
       </section>
     </main>
 
     <footer>
-      <small>
+      <small data-i18n="footerNote">
         Proyecto informativo sin comentarios públicos. Próximo paso: integración con datos de ayuntamientos.
       </small>
     </footer>
