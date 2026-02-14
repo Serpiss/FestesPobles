@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FestesPobles · Fiestas de la Comunitat Valenciana</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <h1>FestesPobles</h1>
+      <p>Consulta fiestas patronales de la Comunitat Valenciana en un solo lugar.</p>
+      <button id="loginBtn">Iniciar sesión (demo)</button>
+      <p id="sessionState" class="muted">No has iniciado sesión.</p>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Filtros</h2>
+        <div class="filters">
+          <label>
+            Provincia
+            <select id="provinciaFilter">
+              <option value="">Todas</option>
+            </select>
+          </label>
+          <label>
+            Comarca
+            <select id="comarcaFilter">
+              <option value="">Todas</option>
+            </select>
+          </label>
+          <label>
+            Mes
+            <select id="mesFilter">
+              <option value="">Todos</option>
+            </select>
+          </label>
+          <label>
+            Búsqueda
+            <input id="searchFilter" type="search" placeholder="Nombre del pueblo o fiesta" />
+          </label>
+        </div>
+      </section>
+
+      <section class="grid-2">
+        <article class="card">
+          <h2>Mapa (MVP visual)</h2>
+          <p class="muted">Pulsa un municipio para ver su ficha.</p>
+          <div id="mapa" class="mapa"></div>
+        </article>
+
+        <article class="card">
+          <h2>Calendario</h2>
+          <ul id="calendarList" class="list"></ul>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Listado de fiestas</h2>
+        <ul id="fiestasList" class="list"></ul>
+      </section>
+
+      <section class="card">
+        <h2>Favoritos</h2>
+        <ul id="favoritosList" class="list"></ul>
+      </section>
+    </main>
+
+    <footer>
+      <small>
+        Proyecto informativo sin comentarios públicos. Próximo paso: integración con datos de ayuntamientos.
+      </small>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
