@@ -1,30 +1,219 @@
 const fiestas = [
   {
-    id: 'altea-moros',
-    municipio: 'Altea',
+    id: 'agres-sant-miquel',
+    municipio: 'Agres',
     provincia: 'Alicante',
-    comarca: 'Marina Baixa',
-    nombre: 'Moros y Cristianos de Altea',
-    inicio: '2026-09-20',
-    fin: '2026-09-24'
+    comarca: 'El Comtat',
+    nombre: 'Fiestas de Sant Miquel',
+    inicio: '2026-09-27',
+    fin: '2026-09-30'
   },
   {
-    id: 'sueca-falles',
-    municipio: 'Sueca',
-    provincia: 'Valencia',
-    comarca: 'Ribera Baixa',
-    nombre: 'Falles de Sueca',
-    inicio: '2026-03-15',
-    fin: '2026-03-19'
+    id: 'alcocer-planes-patronales',
+    municipio: 'Alcosser de Planes',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de Alcosser de Planes',
+    inicio: '2026-08-20',
+    fin: '2026-08-24'
   },
   {
-    id: 'vila-real-patro',
-    municipio: 'Vila-real',
-    provincia: 'Castellón',
-    comarca: 'Plana Baixa',
-    nombre: 'Fiestas Patronales de San Pascual',
-    inicio: '2026-05-10',
-    fin: '2026-05-20'
+    id: 'alcoleja-sant-vicent',
+    municipio: 'Alcoleja',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas de Sant Vicent Ferrer',
+    inicio: '2026-04-24',
+    fin: '2026-04-27'
+  },
+  {
+    id: 'alfafara-moros-cristians',
+    municipio: 'Alfafara',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Moros i Cristians d\'Alfafara',
+    inicio: '2026-08-13',
+    fin: '2026-08-17'
+  },
+  {
+    id: 'almudaina-patronales',
+    municipio: 'Almudaina',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de Almudaina',
+    inicio: '2026-08-10',
+    fin: '2026-08-13'
+  },
+  {
+    id: 'balones-sant-francesc',
+    municipio: 'Balones',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas de Sant Francesc',
+    inicio: '2026-10-02',
+    fin: '2026-10-05'
+  },
+  {
+    id: 'benasau-patronales',
+    municipio: 'Benasau',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de Benasau',
+    inicio: '2026-08-14',
+    fin: '2026-08-18'
+  },
+  {
+    id: 'beniarres-moros-cristians',
+    municipio: 'Beniarrés',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Moros y Cristianos de Beniarrés',
+    inicio: '2026-08-27',
+    fin: '2026-08-31'
+  },
+  {
+    id: 'benifallim-patronales',
+    municipio: 'Benifallim',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de Benifallim',
+    inicio: '2026-09-11',
+    fin: '2026-09-14'
+  },
+  {
+    id: 'benilloba-moros-cristians',
+    municipio: 'Benilloba',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Moros y Cristianos de Benilloba',
+    inicio: '2026-08-11',
+    fin: '2026-08-16'
+  },
+  {
+    id: 'benillup-patronales',
+    municipio: 'Benillup',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de Benillup',
+    inicio: '2026-09-04',
+    fin: '2026-09-07'
+  },
+  {
+    id: 'benimarfull-patronales',
+    municipio: 'Benimarfull',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de Benimarfull',
+    inicio: '2026-08-21',
+    fin: '2026-08-24'
+  },
+  {
+    id: 'benimassot-santa-ana',
+    municipio: 'Benimassot',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas de Santa Ana',
+    inicio: '2026-07-24',
+    fin: '2026-07-27'
+  },
+  {
+    id: 'cocentaina-mare-deu',
+    municipio: 'Cocentaina',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas de la Mare de Déu del Miracle',
+    inicio: '2026-04-17',
+    fin: '2026-04-21'
+  },
+  {
+    id: 'fageca-patronales',
+    municipio: 'Fageca',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de Fageca',
+    inicio: '2026-08-07',
+    fin: '2026-08-10'
+  },
+  {
+    id: 'famorca-patronales',
+    municipio: 'Famorca',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de Famorca',
+    inicio: '2026-09-18',
+    fin: '2026-09-21'
+  },
+  {
+    id: 'gaianes-moros-cristians',
+    municipio: 'Gaianes',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Moros y Cristianos de Gaianes',
+    inicio: '2026-07-10',
+    fin: '2026-07-13'
+  },
+  {
+    id: 'gorga-patronales',
+    municipio: 'Gorga',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de Gorga',
+    inicio: '2026-08-28',
+    fin: '2026-08-31'
+  },
+  {
+    id: 'millena-patronales',
+    municipio: 'Millena',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de Millena',
+    inicio: '2026-09-25',
+    fin: '2026-09-28'
+  },
+  {
+    id: 'muro-alcoi-moros-cristians',
+    municipio: 'Muro de Alcoy',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Moros y Cristianos de Muro de Alcoy',
+    inicio: '2026-05-08',
+    fin: '2026-05-12'
+  },
+  {
+    id: 'lorxa-patronales',
+    municipio: 'L\'Orxa',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de L\'Orxa',
+    inicio: '2026-08-05',
+    fin: '2026-08-08'
+  },
+  {
+    id: 'planes-patronales',
+    municipio: 'Planes',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de Planes',
+    inicio: '2026-08-01',
+    fin: '2026-08-04'
+  },
+  {
+    id: 'quatretondeta-patronales',
+    municipio: 'Quatretondeta',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de Quatretondeta',
+    inicio: '2026-09-10',
+    fin: '2026-09-13'
+  },
+  {
+    id: 'tollos-patronales',
+    municipio: 'Tollos',
+    provincia: 'Alicante',
+    comarca: 'El Comtat',
+    nombre: 'Fiestas Patronales de Tollos',
+    inicio: '2026-08-22',
+    fin: '2026-08-25'
   }
 ];
 
@@ -57,15 +246,24 @@ function fillFilters() {
   months.forEach((name, index) => mesFilter.add(new Option(name, String(index + 1).padStart(2, '0'))));
 }
 
+function normalizeText(value) {
+  return value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '');
+}
+
 function applyFilters() {
   return fiestas.filter((f) => {
-    const search = searchFilter.value.trim().toLowerCase();
+    const search = normalizeText(searchFilter.value.trim());
     const month = f.inicio.slice(5, 7);
+    const searchableText = normalizeText(`${f.nombre} ${f.municipio} ${f.comarca} ${f.provincia}`);
+
     return (
       (!provinciaFilter.value || f.provincia === provinciaFilter.value) &&
       (!comarcaFilter.value || f.comarca === comarcaFilter.value) &&
       (!mesFilter.value || month === mesFilter.value) &&
-      (!search || `${f.nombre} ${f.municipio}`.toLowerCase().includes(search))
+      (!search || searchableText.includes(search))
     );
   });
 }
